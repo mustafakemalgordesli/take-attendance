@@ -16,7 +16,7 @@ from enum import Enum, IntEnum
 
 load_dotenv()
 
-from db import User, session
+# from db import User, session
 
 app = FastAPI()
 
@@ -65,6 +65,11 @@ async def create_upload_file(id, file: UploadFile):
 
 # @app.post("/auth/register")
 # async def register(model: RegisterModel):
+#     try:
+#         print(model)
+#         return { "success": True }
+#     except Exception as e:
+#         return {"message": e.args, "success": False}
     
 
 
