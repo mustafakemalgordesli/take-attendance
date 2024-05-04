@@ -45,10 +45,11 @@ def read_root():
 @app.post("/uploadfile/{id}")
 async def create_upload_file(id, file: UploadFile):
     try: 
-        file_path = f"{os.getcwd()}/static/{uuid.uuid4()}{file.filename}"
+        file_name = str(uuid.uuid4()) + file.filename
+        file_path = f"{os.getcwd()}/static/{file_name}"
         with open(file_path, "wb") as f:
             f.write(file.file.read())
-        return {"path": file_path, "success": True}
+        return {"path": file_name, "success": True}
     except Exception as e:
         return {"message": e.args, "success": False}
     
