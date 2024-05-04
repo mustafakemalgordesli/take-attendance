@@ -1,7 +1,7 @@
 # pip freeze > requirements.txt
 # pip install -r requirements.txt
 # uvicorn main:app --reload
-
+from dotenv import load_dotenv
 import uuid
 from typing import Union
 from fastapi import FastAPI
@@ -9,6 +9,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, UploadFile
 from fastapi.staticfiles import StaticFiles
 import os
+from pydantic import BaseModel, EmailStr
+from enum import Enum, IntEnum
+
+load_dotenv()
+
+from db import User, session
 
 app = FastAPI()
 
@@ -36,14 +42,27 @@ def read_root():
 
 @app.post("/uploadfile/{id}")
 async def create_upload_file(id, file: UploadFile):
-    print(id)
     try: 
         file_path = f"{os.getcwd()}/static/{uuid.uuid4()}{file.filename}"
-        print(file_path)
         with open(file_path, "wb") as f:
             f.write(file.file.read())
-        return {"message": "File saved successfully"}
+        return {"path": file_path, "success": True}
     except Exception as e:
-        return {"message": e.args}
+        return {"message": e.args, "success": False}
+    
+    
+
+
+# class RoleEnum(str, Enum):
+#     student = 'student'
+#     teacher = 'teacher'
+# class RegisterModel(BaseModel):
+#     email: EmailStr
+#     password: str
+#     role: RoleEnum
+
+# @app.post("/auth/register")
+# async def register(model: RegisterModel):
+    
 
 
