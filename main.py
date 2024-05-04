@@ -1,6 +1,8 @@
 # pip freeze > requirements.txt
 # pip install -r requirements.txt
 # uvicorn main:app --reload
+# sudo docker build -t my-fastapi-app .
+# sudo docker run -d -p 8000:8000 my-fastapi-app
 from dotenv import load_dotenv
 import uuid
 from typing import Union

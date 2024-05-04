@@ -10,6 +10,7 @@ httptools==0.6.1
 idna==3.7
 passlib==1.7.4
 psycopg2==2.9.9
+psycopg2-binary==2.9.9
 pyasn1==0.6.0
 pydantic==2.7.1
 pydantic-settings==2.2.1
